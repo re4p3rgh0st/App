@@ -1,0 +1,36 @@
+{
+  "name": "ghost-void",
+  "productName": "GHOST VOID",
+  "version": "1.0.0",
+  "description": "GHOST VOID - Beyond Reality",
+  "author": "GHOST",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "dist": "electron-builder --win"
+  },
+  "build": {
+    "appId": "com.ghostvoid.app",
+    "productName": "GHOST VOID",
+    "files": [
+      "main.js",
+      "index.html",
+      "icon.ico"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "icon": "icon.ico",
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  }
+}
