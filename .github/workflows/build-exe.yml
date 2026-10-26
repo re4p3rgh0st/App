@@ -1,0 +1,31 @@
+name: Build Windows exe
+
+on:
+  workflow_dispatch:        # lets you press "Run workflow" by hand
+  push:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install the build tools (on GitHub's computer, not yours)
+        run: npm install --save-dev electron electron-builder
+
+      - name: Build the .exe files
+        run: npx electron-builder --win --publish never
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+
+      - name: Save the .exe files so you can download them
+        uses: actions/upload-artifact@v4
+        with:
+          name: GHOST-VOID-windows
+          path: dist/*.exe
+
